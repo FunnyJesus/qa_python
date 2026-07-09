@@ -7,28 +7,24 @@ import pytest
 class TestBooksCollector:
     # напиши свои тесты ниже
     # чтобы тесты были независимыми в каждом из них создавай отдельный экземпляр класса BooksCollector()
-    def test_add_new_book_add_not_new_book(self):
-        collector = BooksCollector()
+    def test_add_new_book_add_not_new_book(self, collector):
         collector.add_new_book('Мастер и Маргарита')
         collector.add_new_book('Мастер и Маргарита')
         assert len(collector.get_books_genre()) == 1
 
     @pytest.mark.parametrize('book, genre', [('О дивный новый мир', 'Фантастика')])
-    def test_set_book_genre_add_and_get_genre_for_book(self, book, genre):
-        collector = BooksCollector()
+    def test_set_book_genre_add_and_get_genre_for_book(self, collector, book, genre):
         collector.add_new_book(book)
         collector.set_book_genre(book, genre)
         assert collector.get_book_genre(book) == 'Фантастика'
 
     @pytest.mark.parametrize('book, genre', [('О дивный новый мир', 'Драма')])
-    def test_set_book_genre_set_genre_not_in_list(self, book, genre):
-        collector = BooksCollector()
+    def test_set_book_genre_set_genre_not_in_list(self, collector, book, genre):
         collector.add_new_book(book)
         collector.set_book_genre(book, genre)
         assert collector.get_book_genre(book) == ''
 
-    def test_get_books_with_specific_genre_get_horror(self):
-        collector = BooksCollector()
+    def test_get_books_with_specific_genre_get_horror(self, collector):
         books_data = [
         ('Кладбище домашних животных', 'Ужасы'),
         ('Дракула', 'Ужасы'),
@@ -39,8 +35,7 @@ class TestBooksCollector:
             collector.set_book_genre(book, genre)
         assert len(collector.get_books_with_specific_genre('Ужасы')) == 2
 
-    def test_get_books_genre_get_dict_with_four_books(self):
-        collector = BooksCollector()
+    def test_get_books_genre_get_dict_with_four_books(self, collector):
         books_data = [
         ('Кладбище домашних животных', 'Ужасы'),
         ('Дракула', 'Ужасы'),
@@ -51,8 +46,7 @@ class TestBooksCollector:
             collector.set_book_genre(book, genre)
         assert len(collector.get_books_genre()) == 4
 
-    def test_get_books_for_children_get_two_children_book(self):
-        collector = BooksCollector()
+    def test_get_books_for_children_get_two_children_book(self, collector):
         books_data = [
         ('Кладбище домашних животных', 'Ужасы'),
         ('Дракула', 'Ужасы'),
@@ -63,22 +57,19 @@ class TestBooksCollector:
             collector.set_book_genre(book, genre)
         assert len(collector.get_books_for_children()) == 2
 
-    def test_add_book_in_favorites_add_one_book(self):
-        collector = BooksCollector()
+    def test_add_book_in_favorites_add_one_book(self, collector):
         collector.add_new_book('Кладбище домашних животных')
         collector.add_book_in_favorites('Кладбище домашних животных')
         assert len(collector.get_list_of_favorites_books()) == 1
 
-    def test_add_book_in_favorites_add_one_book_twice(self):
-        collector = BooksCollector()
+    def test_add_book_in_favorites_add_one_book_twice(self, collector):
         collector.add_new_book('Коллекционер')
         collector.add_book_in_favorites('Коллекционер')
         collector.add_book_in_favorites('Коллекционер')
         assert len(collector.get_list_of_favorites_books()) == 1
 
     @pytest.mark.parametrize('book', [('Понедельник начинается в субботу')])
-    def test_delete_book_from_favorites_delete_one_book(self, book):
-        collector = BooksCollector()
+    def test_delete_book_from_favorites_delete_one_book(self, collector, book):
         collector.add_new_book(book)
         collector.add_book_in_favorites(book)
         collector.delete_book_from_favorites(book)
