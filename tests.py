@@ -71,3 +71,9 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Понедельник начинается в субботу')
         collector.delete_book_from_favorites('Понедельник начинается в субботу')
         assert len(collector.get_list_of_favorites_books()) == 0
+
+    @pytest.mark.parametrize('book, genre', [('Оно', 'Ужасы'), ('1984', 'Фантастика')])
+    def test_get_book_genre_get_book_genre(self, collector, book, genre):
+        collector.add_new_book(book)
+        collector.set_book_genre(book, genre)
+        assert collector.get_book_genre(book) == genre
