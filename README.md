@@ -9,3 +9,4 @@
 - **test_add_book_in_favorites_add_one_book** - проверка для add_book_in_favorites и get_list_of_favorites_books, добавляем книгу в избранное и проверяем количество книг в избранном
 - **test_add_book_in_favorites_add_one_book_twice** - проверка для add_book_in_favorites, добавляем одну книгу в избранное дважды и проверяем, что она НЕ добавлена
 - **test_delete_book_from_favorites_delete_one_book** - проверка для delete_book_from_favorites, добавляем книгу в избранное, удаляем книгу из избранного и проверяем количество книг в избранном
+- **test_get_book_genre_get_book_genre** - проверка для get_book_genre, добавляем 2 книги в разном жанре и проверяем, что получаем соответствующий жанр для каждой книги
