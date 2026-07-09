@@ -12,17 +12,15 @@ class TestBooksCollector:
         collector.add_new_book('Мастер и Маргарита')
         assert len(collector.get_books_genre()) == 1
 
-    @pytest.mark.parametrize('book, genre', [('О дивный новый мир', 'Фантастика')])
-    def test_set_book_genre_add_and_get_genre_for_book(self, collector, book, genre):
-        collector.add_new_book(book)
-        collector.set_book_genre(book, genre)
-        assert collector.get_book_genre(book) == 'Фантастика'
+    def test_set_book_genre_add_and_get_genre_for_book(self, collector):
+        collector.add_new_book('О дивный новый мир')
+        collector.set_book_genre('О дивный новый мир', 'Фантастика')
+        assert collector.get_book_genre('О дивный новый мир') == 'Фантастика'
 
-    @pytest.mark.parametrize('book, genre', [('О дивный новый мир', 'Драма')])
-    def test_set_book_genre_set_genre_not_in_list(self, collector, book, genre):
-        collector.add_new_book(book)
-        collector.set_book_genre(book, genre)
-        assert collector.get_book_genre(book) == ''
+    def test_set_book_genre_set_genre_not_in_list(self, collector):
+        collector.add_new_book('О дивный новый мир')
+        collector.set_book_genre('О дивный новый мир','Драма')
+        assert collector.get_book_genre('О дивный новый мир') == ''
 
     def test_get_books_with_specific_genre_get_horror(self, collector):
         books_data = [
@@ -68,9 +66,8 @@ class TestBooksCollector:
         collector.add_book_in_favorites('Коллекционер')
         assert len(collector.get_list_of_favorites_books()) == 1
 
-    @pytest.mark.parametrize('book', [('Понедельник начинается в субботу')])
-    def test_delete_book_from_favorites_delete_one_book(self, collector, book):
-        collector.add_new_book(book)
-        collector.add_book_in_favorites(book)
-        collector.delete_book_from_favorites(book)
+    def test_delete_book_from_favorites_delete_one_book(self, collector):
+        collector.add_new_book('Понедельник начинается в субботу')
+        collector.add_book_in_favorites('Понедельник начинается в субботу')
+        collector.delete_book_from_favorites('Понедельник начинается в субботу')
         assert len(collector.get_list_of_favorites_books()) == 0
