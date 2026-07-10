@@ -24,7 +24,7 @@ jobs:
                 flake8 . --count --max-line-length=127 --statistics || true
             - name: Run Tests
               run: |
-                pytest -v
+                pytest -v tests.py
     
 
 
